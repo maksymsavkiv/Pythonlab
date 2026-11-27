@@ -1,0 +1,7 @@
+{% extends "monitoring/base.html" %}
+{% block title %}{{ device.name }}{% endblock %}
+{% block content %}
+<h1>{{ device.name }}</h1>
+<p>Серійний номер: {{ device.serial }}</p>
+<a href="{% url 'monitoring:index' %}">До переліку пристроїв</a>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "monitoring/base.html" %}
+{% block title %}Кімната 3D друку{% endblock %}
+{% block content %}
+<h1>Кімната 3D друку</h1>
+<p>Моніторинг обладнання — варіант 18</p>
+<form method="get" action="{% url 'monitoring:index' %}">
+    <input type="search" name="q" value="{{ q }}" placeholder="Назва пристрою" aria-label="Назва пристрою">
+    <button type="submit">Пошук</button>
+    <a href="{% url 'monitoring:index' %}">Скинути</a>
+</form>
+<table>
+    <thead><tr><th>Назва</th><th>Серійний номер</th></tr></thead>
+    <tbody>
+    {% for device in devices %}
+        <tr><td><a href="{% url 'monitoring:detail' device.pk %}">{{ device.name }}</a></td><td>{{ device.serial }}</td></tr>
+    {% empty %}
+        <tr><td colspan="2">Пристроїв немає</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
