@@ -9,12 +9,12 @@
     <a href="{% url 'monitoring:index' %}">Скинути</a>
 </form>
 <table>
-    <thead><tr><th>Назва</th><th>Серійний номер</th></tr></thead>
+    <thead><tr><th>Назва</th><th>Серійний номер</th><th>Вимірювання</th><th>Середня температура</th></tr></thead>
     <tbody>
     {% for device in devices %}
-        <tr><td><a href="{% url 'monitoring:detail' device.pk %}">{{ device.name }}</a></td><td>{{ device.serial }}</td></tr>
+        <tr><td><a href="{% url 'monitoring:detail' device.pk %}">{{ device.name }}</a></td><td>{{ device.serial }}</td><td>{{ device.n }}</td><td>{% if device.mean is None %}немає даних{% else %}{{ device.mean|floatformat:2 }} °C{% endif %}</td></tr>
     {% empty %}
-        <tr><td colspan="2">Пристроїв немає</td></tr>
+        <tr><td colspan="4">Пристроїв немає</td></tr>
     {% endfor %}
     </tbody>
 </table>

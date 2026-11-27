@@ -1,0 +1,107 @@
+{
+  "variant": 18,
+  "scenario": "Кімната 3D друку",
+  "devices": [
+    {
+      "name": "Принтер стіл",
+      "serial": "V18-A"
+    },
+    {
+      "name": "Принтер шафа",
+      "serial": "V18-B"
+    },
+    {
+      "name": "Офіс",
+      "serial": "V18-C"
+    }
+  ],
+  "passports": [
+    {
+      "serial": "V18-A",
+      "location": "Стіл друку"
+    },
+    {
+      "serial": "V18-B",
+      "location": "Шафа матеріалу"
+    }
+  ],
+  "tags": [
+    "Друк",
+    "Полімер",
+    "Резерв"
+  ],
+  "device_tags": {
+    "V18-A": [
+      "Друк",
+      "Полімер"
+    ],
+    "V18-B": [
+      "Друк"
+    ],
+    "V18-C": [
+      "Резерв"
+    ]
+  },
+  "measurements": [
+    {
+      "serial": "V18-A",
+      "temperature": "32.00",
+      "measured_at": "2026-10-18T08:00:00+00:00"
+    },
+    {
+      "serial": "V18-A",
+      "temperature": "34.00",
+      "measured_at": "2026-10-18T08:30:00+00:00"
+    },
+    {
+      "serial": "V18-A",
+      "temperature": "33.00",
+      "measured_at": "2026-10-18T09:00:00+00:00"
+    },
+    {
+      "serial": "V18-A",
+      "temperature": "43.00",
+      "measured_at": "2026-10-18T09:30:00+00:00"
+    },
+    {
+      "serial": "V18-A",
+      "temperature": "35.00",
+      "measured_at": "2026-10-18T10:00:00+00:00"
+    },
+    {
+      "serial": "V18-B",
+      "temperature": "38.00",
+      "measured_at": "2026-10-18T08:00:00+00:00"
+    },
+    {
+      "serial": "V18-B",
+      "temperature": "37.00",
+      "measured_at": "2026-10-18T08:30:00+00:00"
+    },
+    {
+      "serial": "V18-B",
+      "temperature": "40.00",
+      "measured_at": "2026-10-18T09:00:00+00:00"
+    },
+    {
+      "serial": "V18-B",
+      "temperature": "44.00",
+      "measured_at": "2026-10-18T09:30:00+00:00"
+    },
+    {
+      "serial": "V18-B",
+      "temperature": "39.00",
+      "measured_at": "2026-10-18T10:00:00+00:00"
+    }
+  ],
+  "search": {
+    "q": "Принтер",
+    "expected_serials": [
+      "V18-A",
+      "V18-B"
+    ],
+    "no_match": "неіснуючий-зразок"
+  },
+  "threshold": "42",
+  "extra_criterion": "На сторінці пристрою позначайте перевищення temperature > 42. Рівність порогу не є перевищенням."
+}

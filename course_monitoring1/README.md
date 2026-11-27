@@ -71,3 +71,21 @@ Git: git init; git add .; git status; git diff --cached; git commit -m "Lab 15".
 SQLite: monitoring_device належить застосунку; auth_user, auth_group, auth_permission, таблиці зв'язків auth_user_groups, auth_user_user_permissions, auth_group_permissions — авторизація Django; django_migrations — історія міграцій. Для PostgreSQL/MySQL змінюються ENGINE, NAME, USER, PASSWORD, HOST, PORT та потрібен драйвер. Паролі не зберігати у Git, права користувача БД мінімальні.
 
 Після перевірок: git status, git add config monitoring inspect_db.py README.md, git diff --cached, git commit -m "Lab 16", git push. Посилання на коміт додати до звіту. Не включати .venv, db.sqlite3, кеші, .env.
+
+## ЛР17 — пов’язані моделі
+
+Збережено 0001_initial з ЛР16. Нова міграція 0002_related_models додає Tag, Passport, Measurement та зв’язок Device.tags. Виконуйте в PowerShell у папці проєкту (збережіть наявні .venv, db.sqlite3 та .git):
+
+```powershell
+.\.venv\Scripts\python.exe manage.py sqlmigrate monitoring 0002
+.\.venv\Scripts\python.exe manage.py migrate
+.\.venv\Scripts\python.exe manage.py showmigrations
+.\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+.\.venv\Scripts\python.exe manage.py check
+.\.venv\Scripts\python.exe manage.py load_profile
+.\.venv\Scripts\python.exe manage.py orm_demo
+.\.venv\Scripts\python.exe manage.py test monitoring -v 2
+.\.venv\Scripts\python.exe manage.py runserver 127.0.0.1:8000
+```
+
+load_profile використовує точні дані профілю 18 та наявні Device за serial. У чистій базі або базі ЛР16 без додаткових вимірювань очікуються 3 пристрої, 2 паспорти, 3 мітки, 10 вимірювань. Повторний запуск не створює ідентичних вимірювань. orm_demo використовує окремий тимчасовий запис і відкочує транзакцію; не створюйте власний DEMO-L17. Для ручної перевірки admin додайте тимчасове вимірювання та видаліть його після перевірки. Середні: A 35.4, B 39.6, загальне 37.5; C без даних. Понад 42: 43 і 44. Зв’язки: Device–Passport 1:0..1 (CASCADE), Device–Measurement 1:N (PROTECT), Device–Tag M:N. Валідатори full_clean та CheckConstraint БД незалежні; save не запускає full_clean. Поріг 42 не є межею допустимості. Не додавайте .venv, db.sqlite3, кеші або секрети до Git.

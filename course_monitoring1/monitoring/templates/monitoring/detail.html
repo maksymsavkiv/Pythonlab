@@ -3,5 +3,13 @@
 {% block content %}
 <h1>{{ device.name }}</h1>
 <p>Серійний номер: {{ device.serial }}</p>
+<p>Паспорт: {{ device.passport.location|default:"немає даних" }}</p>
+<p>Мітки: {% for tag in device.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% empty %}немає даних{% endfor %}</p>
+<h2>Вимірювання</h2>
+<table><thead><tr><th>Час</th><th>Температура</th></tr></thead><tbody>
+{% for measurement in measurements %}
+<tr><td>{{ measurement.measured_at|date:"d.m.Y H:i" }}</td><td>{{ measurement.temperature }} °C</td></tr>
+{% empty %}<tr><td colspan="2">немає даних</td></tr>{% endfor %}
+</tbody></table>
 <a href="{% url 'monitoring:index' %}">До переліку пристроїв</a>
 {% endblock %}
